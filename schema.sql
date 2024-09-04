@@ -9,6 +9,16 @@ CREATE TABLE User (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE UserProfile (
+    profile_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES User(user_id) ON DELETE CASCADE,
+    profile_picture VARCHAR(255), -- URL ou caminho para a foto do perfil
+    bio TEXT, -- Biografia ou descrição do usuário
+    preferences JSONB, -- Preferências do usuário armazenadas em formato JSON
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE Plant (
     plant_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES User(user_id),
