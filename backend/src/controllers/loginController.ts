@@ -4,10 +4,6 @@ import jwt from 'jsonwebtoken';
 
 const secretKey = process.env.JWT_SECRET || "";
 
-
-
-
-
 export default class loginController {
     async login (req: Request, res: Response) {
         const { email, password } = req.body

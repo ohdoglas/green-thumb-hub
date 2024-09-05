@@ -1,18 +1,19 @@
 import 'dotenv/config';
-
 import nodemailer from 'nodemailer';
 
 export default async function sendConfirmationEmail(email: string, token: string) {
     const transporter = nodemailer.createTransport({
-        service: 'SendGrid',
+        host: 'smtp.zoho.com',
+        port: 587,
+        secure: false,
         auth: {
-            user: 'apikey',
-            pass: process.env.SENDGRID_API_KEY  // A API Key que você obteve
+            user: process.env.ZOHO_USER,
+            pass: process.env.ZOHO_PASS
         }
     });
 
     const mailOptions = {
-        from: 'you@yourdomain.com', // Seu e-mail verificado no SendGrid
+        from: 'greenthumbhub@zohomail.com',
         to: email,
         subject: 'Confirm your registration',
         text: `Please confirm your registration by clicking the following link: http://localhost:3000/confirm/${token}`
