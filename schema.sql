@@ -19,6 +19,17 @@ CREATE TABLE UserProfile (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE login_attempts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    ip_address VARCHAR(45),
+    attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    success BOOLEAN,
+    failed_attempts INT DEFAULT 0,
+    lock_until TIMESTAMP NULL,
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
 CREATE TABLE Plant (
     plant_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES User(user_id),

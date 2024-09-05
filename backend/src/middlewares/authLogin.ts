@@ -3,32 +3,45 @@ import prisma from "../prisma";
 import comparePassword from "../security/passwordCompare";
 
 export default class authLogin {
+    private static MAX_ATTEMPTS = 5;
+    private static LOCK_TIME = 10 * 30 * 1000;
+
     async authLogin(req: Request, res: Response, next: NextFunction) {
-        const { email, password } = req.body;
+        const { email, password, username } = req.body;
 
         try {
 
-            if (!email || !password) {
+            if (!email && !username) {
                 return res.status(400).json({
-                    message: "All fields are required"
+                    message: "Email or username is required"
                 })
-            }
+            };
 
-            const emailExists = await prisma.user.findUnique({
+            if (!password) {
+                return res.status(400).json({
+                    message: "Password is required required"
+                })
+            };
+
+            const user = await prisma.user.findFirst({
                 where: {
-                    email
+                    OR: [
+                        { email },
+                        { username }
+                    ]
                 }
-            })
+            });
 
-            if (!emailExists) {
+            if (!user) {
                 return res.status(401).json({
-                    message: "Invalid email or password"
+                    message: "Invalid email/username or password"
                 })
             }
+
 
             const findPassword = await prisma.user.findUnique({
                 where: {
-                    email: email
+                    email: user.email
                 },
                 select: {
                     password: true
@@ -37,7 +50,7 @@ export default class authLogin {
 
             if (!findPassword) {
                 return res.status(401).json({
-                    message: "Invalid email or password"
+                    message: "Invalid email/username or password"
                 })
             }
 
@@ -46,10 +59,13 @@ export default class authLogin {
             const validateHash = await comparePassword(password, storePassword);
 
             if (!validateHash) {
+                // await this.trackFailedAttempt(user.email);
                 return res.status(401).json({
-                    message: "Invalid email or password"
+                    message: "Invalid email/username or password"
                 })
             }
+
+            // await this.resetFailedAttempts(user.email);
 
             next();
 
@@ -59,4 +75,13 @@ export default class authLogin {
                 message: erro.message})
         }
     }
+
+
+    // private async trackFailedAttempt(email: string) {
+
+    // }
+
+    // private async resetFailedAttempts(email: string) {
+
+    // }
 }
