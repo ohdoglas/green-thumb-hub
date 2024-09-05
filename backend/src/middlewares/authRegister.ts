@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
 import validateEmail from "../security/validadeEmail";
 import validatePassword from "../security/validatePassword";
+import isValidUsername from "../security/validateUsername";
 
 export default class authRegister {
     async registerValidation (req: Request, res: Response, next: NextFunction) {
@@ -14,11 +15,19 @@ export default class authRegister {
                 });
             }
 
+            const validUsername = isValidUsername(username);
+
             const validEmail = validateEmail(email);
 
             if (!validEmail) {
                 return res.status(400).json({
                     message: "Please, enter a valid e-mail"
+                });
+            }
+
+            if (!validUsername) {
+                return res.status(400).json({
+                    message: "Please, enter a valid username"
                 });
             }
 
