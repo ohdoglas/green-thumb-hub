@@ -4,6 +4,7 @@ import registerController from "./controllers/registerController";
 import authRegister from "./middlewares/authRegister";
 import authLogin from "./middlewares/authLogin";
 import loginController from "./controllers/loginController";
+import confirmationController from "./controllers/confirmationController";
 
 
 const routes = Router();
@@ -17,6 +18,7 @@ routes.get('/', (req: Request, res: Response) => {
 })
 
 routes.post('/register', registerValidation, register);
+routes.get('/confirm/:token', new confirmationController().confirmRegistration);
 routes.post('/login', loginValidation, login);
 
 

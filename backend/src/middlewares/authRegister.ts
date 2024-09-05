@@ -14,7 +14,7 @@ export default class authRegister {
                 });
             }
 
-            const validEmail = await validateEmail(email);
+            const validEmail = validateEmail(email);
 
             if (!validEmail) {
                 return res.status(400).json({
@@ -36,7 +36,7 @@ export default class authRegister {
 
             if (userExists) {
                 return res.status(400).json({
-                    message: "User already in use"
+                    message: "Username already in use"
                 });
             }
 
@@ -46,7 +46,7 @@ export default class authRegister {
                 });
             }
 
-            const validPassword = await validatePassword(password);
+            const validPassword = validatePassword(password);
 
             if (!validPassword) {
                 return res.status(400).json({

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
 import comparePassword from "../security/passwordCompare";
+// import { trackLoginAttempt } from "../security/tacker";
 
 export default class authLogin {
     private static MAX_ATTEMPTS = 5;
@@ -40,18 +41,14 @@ export default class authLogin {
 
 
             const findPassword = await prisma.user.findUnique({
-                where: {
-                    email: user.email
-                },
-                select: {
-                    password: true
-                }
+                where: { userId: user.userId },
+                select: { password: true }
             });
 
             if (!findPassword) {
                 return res.status(401).json({
                     message: "Invalid email/username or password"
-                })
+                });
             }
 
             const storePassword = findPassword.password;
@@ -59,13 +56,13 @@ export default class authLogin {
             const validateHash = await comparePassword(password, storePassword);
 
             if (!validateHash) {
-                // await this.trackFailedAttempt(user.email);
+                // await trackLoginAttempt(user.userId, req.ip, false);
                 return res.status(401).json({
                     message: "Invalid email/username or password"
-                })
+                });
             }
 
-            // await this.resetFailedAttempts(user.email);
+            // await trackLoginAttempt(user.userId, req.ip, true);
 
             next();
 

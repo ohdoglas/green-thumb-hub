@@ -1,28 +1,33 @@
 import { Request, Response } from "express";
 import prisma from "../prisma";
 import hash from "../security/hash";
-import validatePassword from "../security/validatePassword";
-import validateEmail from "../security/validadeEmail";
+import 'dotenv/config'
+import generateConfirmationToken from "../security/confirmToken";
+import sendConfirmationEmail from "../security/confirmationEmail";
+
 
 export default class registerController {
-    async register (req: Request, res: Response) {
+    async register(req: Request, res: Response) {
         const { username, email, password } = req.body;
 
         try {
-
             const hashed = await hash(password);
+            const confirmationToken = await generateConfirmationToken();
+            // const newUser = await prisma.user.create({
+            //     data: {
+            //         username,
+            //         email,
+            //         password: hashed,
+            //         confirmationToken,
+            //         isConfirmed: false
+            //     }
+            // });
 
-            const newUser = await prisma.user.create({
-                data: {
-                    username,
-                    email,
-                    password: hashed
-                }
-            })
+            await sendConfirmationEmail(email, confirmationToken);
 
             return res.status(200).json({
-                message: "Tudo ok até aqui!",
-                use: {
+                message: "Registration successful, please check your email to confirm your registration.",
+                user: {
                     username,
                     email
                 }
@@ -34,4 +39,6 @@ export default class registerController {
             });
         }
     }
+
+
 }
