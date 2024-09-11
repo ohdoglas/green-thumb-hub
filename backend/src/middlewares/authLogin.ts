@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
 import comparePassword from "../security/passwordCompare";
-// import { trackLoginAttempt } from "../security/tacker";
+import { resetFailedAttempts, trackLoginAttempt } from "../security/tacker";
 
 export default class authLogin {
     private static MAX_ATTEMPTS = 5;
     private static LOCK_TIME = 10 * 30 * 1000;
+
+
+
 
     async authLogin(req: Request, res: Response, next: NextFunction) {
         const { email, password, username } = req.body;
@@ -39,6 +42,17 @@ export default class authLogin {
                 })
             }
 
+            const verifyConfirmation = await prisma.user.findUnique({
+                where: { userId: user.userId},
+                select: { isConfirmed: true}
+            })
+
+            if (verifyConfirmation?.isConfirmed === false || verifyConfirmation === null) {
+                return res.status(401).json({
+                    message: "Please confirm your email to log in"
+                })
+            }
+
 
             const findPassword = await prisma.user.findUnique({
                 where: { userId: user.userId },
@@ -55,14 +69,23 @@ export default class authLogin {
 
             const validateHash = await comparePassword(password, storePassword);
 
+            const userIp = req.ip || "unknown";
+
             if (!validateHash) {
-                // await trackLoginAttempt(user.userId, req.ip, false);
+                await trackLoginAttempt(user.userId, userIp, false);
                 return res.status(401).json({
                     message: "Invalid email/username or password"
                 });
             }
 
-            // await trackLoginAttempt(user.userId, req.ip, true);
+            const findAttempts = await prisma.loginAttempt.findFirst({
+                where: { userId: user.userId },
+                select: { id: true }
+            });
+
+            if (findAttempts) {
+                await resetFailedAttempts(user.email);
+            }
 
             next();
 
@@ -72,13 +95,4 @@ export default class authLogin {
                 message: erro.message})
         }
     }
-
-
-    // private async trackFailedAttempt(email: string) {
-
-    // }
-
-    // private async resetFailedAttempts(email: string) {
-
-    // }
 }

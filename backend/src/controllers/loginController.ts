@@ -8,7 +8,6 @@ export default class loginController {
     async login (req: Request, res: Response) {
         const { email, password } = req.body
 
-
         try {
             const token = jwt.sign( { email: email}, secretKey, { expiresIn: '1h'});
 

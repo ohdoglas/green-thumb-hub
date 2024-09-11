@@ -13,15 +13,15 @@ export default class registerController {
         try {
             const hashed = await hash(password);
             const confirmationToken = await generateConfirmationToken();
-            // const newUser = await prisma.user.create({
-            //     data: {
-            //         username,
-            //         email,
-            //         password: hashed,
-            //         confirmationToken,
-            //         isConfirmed: false
-            //     }
-            // });
+            const newUser = await prisma.user.create({
+                data: {
+                    username,
+                    email,
+                    password: hashed,
+                    confirmationToken,
+                    isConfirmed: false
+                }
+            });
 
             await sendConfirmationEmail(email, confirmationToken);
 

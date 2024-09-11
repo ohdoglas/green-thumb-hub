@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import nodemailer from 'nodemailer';
+const PORT = process.env.PORT
 
 export default async function sendConfirmationEmail(email: string, token: string) {
     const transporter = nodemailer.createTransport({
@@ -16,7 +17,7 @@ export default async function sendConfirmationEmail(email: string, token: string
         from: 'greenthumbhub@zohomail.com',
         to: email,
         subject: 'Confirm your registration',
-        text: `Please confirm your registration by clicking the following link: http://localhost:3000/confirm/${token}`
+        text: `Please confirm your registration by clicking the following link: http://localhost:${PORT}/confirm/${token}`
     };
 
     try {
