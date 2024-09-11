@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "../styles/Home.css";
+import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
     return (
@@ -9,7 +10,9 @@ const Home: React.FC = () => {
                 <nav className="navbar">
                     <div className="logo">Green Thumb Hub</div>
                     <div className="auth-buttons">
+                        <Link to="/register">
                         <button className="sign-up">Sign Up</button>
+                        </Link>
                         <button className="login">Login</button>
                     </div>
                 </nav>
