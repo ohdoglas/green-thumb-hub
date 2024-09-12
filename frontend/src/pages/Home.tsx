@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "../styles/Home.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
+
+    const navigate = useNavigate();
     return (
         <div className="home-container">
             <header className="hero-section">
                 <nav className="navbar">
-                    <div className="logo">Green Thumb Hub</div>
+                    <Link to={"/"}><div className="logo">Green Thumb Hub</div></Link>
                     <div className="auth-buttons">
-                        <Link to="/register">
-                        <button className="sign-up">Sign Up</button>
-                        </Link>
-                        <button className="login">Login</button>
+                        <button className="sign-up" onClick={ () => navigate('/register') }>Sign Up</button>
+                        <button className="login" onClick={ () => navigate('/login')} >Login</button>
                     </div>
                 </nav>
 
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
             <div className="hero-content">
                     <h1>The plant manager for you</h1>
                     <p>Effortlessly manage your garden with expert tools and tips.</p>
-                    <button className="get-started">Get started</button>
+                    <button className="get-started" onClick={ () => navigate('/register') }>Get started</button>
                 </div>
                 <h2>Feature Overview</h2>
                 <div className="features">
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
             <footer className="footer">
                 <div className="cta">
                     <h2>Get started with Green Thumb Hub</h2>
-                    <button className="get-started">Get started</button>
+                    <button className="get-started" onClick={ () => navigate('/register') }>Get started</button>
                 </div>
                 {/* <div className="footer-links">
                     <div className="links-column">
