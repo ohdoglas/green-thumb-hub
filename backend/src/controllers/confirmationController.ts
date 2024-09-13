@@ -22,9 +22,7 @@ export default class confirmationController {
                 data: { isConfirmed: true, confirmationToken: null }
             });
 
-            return res.status(200).json({
-                message: "Registration confirmed successfully!"
-            });
+            return res.redirect('http://localhost:3000/confirmed');
 
         } catch (error) {
             const erro = error as Error;
