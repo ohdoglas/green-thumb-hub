@@ -1,0 +1,277 @@
+/* Estilos globais */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.signup-container, .login-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 0 50px;
+    background-color: #fff;
+}
+
+.login-content {
+    flex: 1;
+    max-width: 50%; /* Mantém a largura máxima em ambas as páginas */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+}
+
+.signup-home button {
+    width: 100%;
+    padding: 15px;
+    background-color: #1e9c48;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+/* Lado esquerdo: container do formulário */
+.signup-form-container, .login-form-container {
+    flex: 1;
+    max-width: 50%; /* Mantém a largura máxima em ambas as páginas */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+}
+
+
+.signup-header, .login-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signup-header h2, .login-header h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Estilos do formulário */
+.signup-form input, .login-form input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.signup-form button, .login-form button {
+    width: 100%;
+    padding: 15px;
+    background-color: #1e9c48;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.signup-form button:hover, .login-form button:hover {
+    background-color: #1e9c48;
+}
+
+
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: flex-start; /* Garante que o conteúdo fique alinhado à esquerda */
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 8px; /* Espaçamento entre checkbox e texto */
+    vertical-align: middle; /* Alinha verticalmente o checkbox com o texto */
+    width: auto; /* Garante que o tamanho do checkbox seja correto */
+}
+
+.remember-me label {
+    margin: 0; /* Remove qualquer margem no label para garantir o alinhamento perfeito */
+}
+
+
+
+/* Estilos de login social */
+.social-signup p {
+    text-align: center;
+    color: #000;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.social-signup p:hover {
+    text-decoration: underline;
+}
+
+/* Link de login */
+.login-link p {
+    text-align: center;
+    color: #1e9c48;
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: #1e9c48;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+
+.signup-link p {
+    text-align: center;
+    color: #1e9c48;
+    margin-top: 20px;
+}
+
+.signup-link a {
+    color: #1e9c48;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+
+
+.navbar {
+    position: fixed; /* Fixa a navbar no topo da tela */
+    top: 0;          /* Garante que esteja encostada no topo */
+    left: 0;         /* Faz com que comece do lado esquerdo da tela */
+    width: 100%;     /* Ocupa toda a largura da tela */
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para dar destaque */
+    z-index: 1000;   /* Garante que a navbar fique por cima de outros elementos */
+    box-sizing: border-box;
+}
+
+.auth-buttons button {
+    background-color: #1e9c48;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1.2em;
+}
+
+
+.logo {
+    color: #000000;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+
+/* Linha vertical separadora */
+.separator {
+    width: 1px;
+    background-color: #ccc;
+    height: 100vh;
+}
+
+/* Lado direito: Imagem que cobre toda a área */
+.signup-image, .login-image {
+    flex: 1;
+    height: 100vh; /* Garante que a altura da imagem seja igual à altura da viewport */
+    background-image: url('../assets/images/gardenImage.jpg'); /* Caminho correto da imagem */
+    background-size: cover; /* Faz com que a imagem cubra todo o espaço */
+    background-position: right; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+}
+
+
+.login-image img, .signup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.input-error {
+    border: 2px solid red;
+}
+
+.input-valid {
+    border: 2px solid green;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+
+
+.password-strength {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.weak-password {
+    color: red;
+}
+
+.medium-password {
+    color: orange;
+}
+
+.strong-password {
+    color: green;
+}
+
+
+
+.password-container {
+    display: flex; /* Faz com que o contêiner use flexbox */
+    align-items: center; /* Centraliza os itens verticalmente */
+    margin-bottom: 20px; /* Espaçamento entre os contêineres de senha */
+}
+
+.password-container input {
+    flex: 10; /* O input ocupa 4 partes do espaço disponível */
+    margin-right: 10px; /* Espaço entre o input e o botão */
+    padding: 10px; /* Ajuste o padding conforme necessário */
+    box-sizing: border-box; /* Inclui o padding e a borda no cálculo da largura */
+}
+
+.password-toggle {
+    flex: 1; /* O botão ocupa 1 parte do espaço disponível */
+    padding: 10px; /* Ajuste o padding conforme necessário */
+    background-color: #4CAF50; /* Cor de fundo do botão */
+    border: none; /* Remove as bordas */
+    color: white; /* Cor do texto */
+    cursor: pointer; /* Muda o cursor para indicar ação */
+    text-align: center; /* Centraliza o texto dentro do botão */
+    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+    border-radius: 4px; /* Adiciona bordas arredondadas, se desejado */
+}
