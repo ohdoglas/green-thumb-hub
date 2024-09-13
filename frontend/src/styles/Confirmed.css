@@ -1,0 +1,97 @@
+/* Global styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Navbar styles */
+.navbar {
+    position: fixed; /* Fixa a navbar no topo da tela */
+    top: 0;          /* Garante que esteja encostada no topo */
+    left: 0;         /* Faz com que comece do lado esquerdo da tela */
+    width: 100%;     /* Ocupa toda a largura da tela */
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para dar destaque */
+    z-index: 1000;   /* Garante que a navbar fique por cima de outros elementos */
+    box-sizing: border-box;
+}
+
+.logo {
+    color: #000000;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+.hero-section {
+    background-image: url('../assets/images/plantHome.svg');
+    background-size: cover;
+    background-position: center;
+    padding: 200px 0;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    margin-left: 150px;
+    margin-right: 150px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.get-started {
+    background-color: #063f19;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.get-started:hover {
+    background-color: #1e9c48;
+}
+
+/* Features section */
+.features-section {
+    padding: 50px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.feature {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+}
+
+.feature h3 {
+    margin-bottom: 10px;
+}
+
+.footer {
+    background-color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+
+

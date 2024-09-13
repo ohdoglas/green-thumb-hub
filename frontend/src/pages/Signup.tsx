@@ -63,7 +63,7 @@ const Signup: React.FC = () => {
         await api.post('/register', { username, email, password });
         setSuccessMessage('Signup successful! Please check your e-mail to confirm your register.');
         setErrorMessage('');
-        navigate('/login');
+        navigate('/confirmation');
       } catch (error) {
         console.log('Error:', error);
 
