@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Confirm from "./pages/Confirmation";
 import RegistrationConfirmed from "./pages/Confirmed";
+import Login from "./pages/Login";
 
 const App: React.FC = () => {
     return (
@@ -14,6 +15,8 @@ const App: React.FC = () => {
                     <Route path="/register" element={<Signup />} />
                     <Route path="/confirmation" element={<Confirm />} />
                     <Route path="/confirmed" element={<RegistrationConfirmed />} />
+                    <Route path="/login" element={<Login />} />
+
                 </Route>
             </Routes>
         </Router>

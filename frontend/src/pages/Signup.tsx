@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/Signup.css";
+import "../styles/LoginSignupLayout.css";
 import api from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from 'axios';
@@ -91,6 +91,9 @@ const Signup: React.FC = () => {
       <Link to={"/"}>
       <div className="logo">Green Thumb Hub</div>
       </Link>
+      <div className="auth-buttons">
+                        <button className="login" onClick={ () => navigate('/login')} >Login</button>
+                    </div>
 
       </div>
 
@@ -177,7 +180,7 @@ const Signup: React.FC = () => {
 
       {/* Lado direito - Imagem */}
       <div className="signup-image"></div>
-    </div>
+      </div>
   );
 };
 
